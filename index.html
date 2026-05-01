@@ -11,7 +11,7 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #ffdde1);
     text-align: center;
     color: #333;
 }
@@ -50,11 +50,17 @@ h1 {
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
+.slide img:hover {
+    transform: scale(1.05);
+    transition: 0.4s;
+}
+
 .mensaje {
     margin-top: 15px;
     font-size: 1.1em;
     line-height: 1.5;
     padding: 10px;
+    min-height: 60px;
 }
 
 .botones {
@@ -97,39 +103,40 @@ button:disabled {
 
     <button onclick="toggleMusica()">🎵 Reproducir / Pausar música</button>
 
+    <!-- SLIDES -->
     <div class="slide">
         <img src="foto5.jpg" alt="Foto juntos">
-        <div class="mensaje">Hoy cumplimos un mes de noviazgo, y puedo decir que lo único que he sentido contigo ha sido mucha felicidad. Estoy muy contento de ser tu novio Valen, te quiero mucho💖</div>
+        <div class="mensaje escribir">Hoy cumplimos un mes de noviazgo, y puedo decir que lo único que he sentido contigo ha sido mucha felicidad. Estoy muy contento de ser tu novio Valen, te quiero mucho💖</div>
     </div>
 
     <div class="slide">
         <img src="foto2.jpg" alt="Foto juntos">
-        <div class="mensaje">Con el tiempo he ido descubriendo la persona tan maravillosa que eres; y me he ido enamorando cada vez más de ti ✨</div>
+        <div class="mensaje escribir">Con el tiempo he ido descubriendo la persona tan maravillosa que eres; y me he ido enamorando cada vez más de ti ✨</div>
     </div>
 
     <div class="slide">
         <img src="foto3.jpg" alt="Foto juntos">
-        <div class="mensaje">Es curioso porque siempre he esperado a la persona correcta y tengo la certeza que contigo la encontré; me encantas demasiado Valentina 😊</div>
+        <div class="mensaje escribir">Es curioso porque siempre he esperado a la persona correcta y tengo la certeza que contigo la encontré; me encantas demasiado Valentina 😊</div>
     </div>
 
     <div class="slide">
         <img src="foto4.jpg" alt="Foto juntos">
-        <div class="mensaje">Gracias por quererme, por hacerme reír, por hacerme sentir seguro, por hacerme sentir nervioso, por hacerme sentir de mil formas bonitas💕</div>
+        <div class="mensaje escribir">Gracias por quererme, por hacerme reír, por hacerme sentir seguro, por hacerme sentir nervioso, por hacerme sentir de mil formas bonitas💕</div>
     </div>
 
     <div class="slide">
         <img src="foto7.jpg" alt="Foto juntos">
-        <div class="mensaje">Espero en un futuro compartir más viajes contigo, más momentos bellos, más tiempo juntos así como el que estás viendo ❤️</div>
+        <div class="mensaje escribir">Espero en un futuro compartir más viajes contigo, más momentos bellos, más tiempo juntos así como el que estás viendo ❤️</div>
     </div>
 
     <div class="slide">
         <img src="foto6.jpg" alt="Foto juntos">
-        <div class="mensaje">Gracias por todo el amor y el cariño que me das; te extraño y espero que estemos juntos pronto para darte mil besos y mil abrazos 🥺</div>
+        <div class="mensaje escribir">Gracias por todo el amor y el cariño que me das; te extraño y espero que estemos juntos pronto para darte mil besos y mil abrazos 🥺</div>
     </div>
 
     <div class="slide">
         <img src="foto1.jpg" alt="Foto juntos">
-        <div class="mensaje">Y esto apenas comienza… Te quiero mucho mucho mucho mucho vida mía💞</div>
+        <div class="mensaje escribir">Y esto apenas comienza… Te quiero mucho mucho mucho mucho vida mía💞</div>
     </div>
 
     <div class="botones">
@@ -140,8 +147,44 @@ button:disabled {
 
 <script>
 let slideActual = 0;
-mostrarSlide(slideActual);
 
+// Guardar textos originales
+window.addEventListener("load", () => {
+    const mensajes = document.querySelectorAll(".escribir");
+    mensajes.forEach(el => {
+        el.setAttribute("data-texto", el.innerText);
+    });
+
+    mostrarSlide(slideActual);
+});
+
+// EFECTO ESCRITURA
+function efectoEscritura(elemento, velocidad = 40) {
+    const texto = elemento.getAttribute("data-texto");
+    elemento.innerHTML = "";
+    let i = 0;
+
+    function escribir() {
+        if (i < texto.length) {
+            elemento.innerHTML += texto.charAt(i);
+            i++;
+            setTimeout(escribir, velocidad);
+        }
+    }
+
+    escribir();
+}
+
+function activarEscritura(index) {
+    const slides = document.getElementsByClassName("slide");
+    const mensaje = slides[index].querySelector(".escribir");
+
+    if (mensaje) {
+        efectoEscritura(mensaje, 50); // puedes cambiar velocidad
+    }
+}
+
+// SLIDES
 function mostrarSlide(n) {
     let slides = document.getElementsByClassName("slide");
 
@@ -153,6 +196,8 @@ function mostrarSlide(n) {
 
     document.getElementById("btnAnterior").disabled = (n === 0);
     document.getElementById("btnSiguiente").disabled = (n === slides.length - 1);
+
+    activarEscritura(n);
 }
 
 function cambiarSlide(n) {
@@ -171,11 +216,12 @@ function cambiarSlide(n) {
     mostrarSlide(slideActual);
 }
 
+// MÚSICA
 function toggleMusica() {
     const audio = document.getElementById("musica");
 
     if (audio.paused) {
-        audio.volume = 0.3;
+        audio.volume = 0.2;
         audio.play();
     } else {
         audio.pause();

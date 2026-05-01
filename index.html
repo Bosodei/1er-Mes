@@ -10,7 +10,7 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .container {
@@ -53,6 +53,11 @@ button {
 button:hover {
     background: #ffe0e6;
 }
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 </style>
 </head>
 
@@ -68,51 +73,45 @@ button:hover {
 
     <button onclick="toggleMusica()">🎵 Reproducir / Pausar música</button>
 
-    <!-- FOTO 1 -->
+    <!-- FOTOS -->
     <div class="slide">
         <img src="foto5.jpg">
         <div class="mensaje">Hoy cumplimos un mes de noviazgo, y puedo decir que lo único que he sentido contigo ha sido mucha felicidad. Estoy muy contento de ser tu novio Valen, te quiero mucho💖</div>
     </div>
 
-    <!-- FOTO 2 -->
     <div class="slide">
         <img src="foto2.jpg">
         <div class="mensaje">Con el tiempo he ido descubriendo la persona tan maravillosa que eres; y me he ido enamorando cada vez más de tí ✨</div>
     </div>
 
-    <!-- FOTO 3 -->
     <div class="slide">
         <img src="foto3.jpg">
         <div class="mensaje">Es curioso porque siempre he esperado a la persona correcta y tengo la certeza que contigo la encontré; me encantas demasiado Valentina 😊</div>
     </div>
 
-    <!-- FOTO 4 -->
     <div class="slide">
         <img src="foto4.jpg">
         <div class="mensaje">Gracias por quererme, por hacerme reír, por hacerme sentir seguro, por hacerme sentir nervioso, por hacerme sentir de mil y una formas bonitas💕</div>
     </div>
 
-    <!-- FOTO 5 -->
     <div class="slide">
         <img src="foto7.jpg">
         <div class="mensaje">Espero en un futuro compartir más viajes contigo, más momento bellos, más tiempo juntos así como el que estás viendo ❤️</div>
     </div>
 
-    <!-- FOTO 6 -->
     <div class="slide">
         <img src="foto6.jpg">
         <div class="mensaje">Gracias por todooooooooooooo el amor y el cariño que me das; te extraño y espero que estemos juntos prontos para darte mil besos y mil abrazos; 🥺</div>
     </div>
 
-    <!-- FOTO 7 -->
     <div class="slide">
         <img src="foto1.jpg">
         <div class="mensaje">Y esto apenas comienza… Te quiero mucho mucho mucho mucho vida mía💞</div>
     </div>
 
     <div class="botones">
-        <button onclick="cambiarSlide(-1)">⬅️ Anterior</button>
-        <button onclick="cambiarSlide(1)">Siguiente ➡️</button>
+        <button id="btnAnterior" onclick="cambiarSlide(-1)">⬅️ Anterior</button>
+        <button id="btnSiguiente" onclick="cambiarSlide(1)">Siguiente ➡️</button>
     </div>
 </div>
 
@@ -122,18 +121,30 @@ mostrarSlide(slideActual);
 
 function mostrarSlide(n) {
     let slides = document.getElementsByClassName("slide");
+
     for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
+
     slides[n].style.display = "block";
+
+    // Control de botones
+    document.getElementById("btnAnterior").disabled = (n === 0);
+    document.getElementById("btnSiguiente").disabled = (n === slides.length - 1);
 }
 
 function cambiarSlide(n) {
     let slides = document.getElementsByClassName("slide");
+
     slideActual += n;
 
-    if (slideActual >= slides.length) slideActual = 0;
-    if (slideActual < 0) slideActual = slides.length - 1;
+    if (slideActual >= slides.length) {
+        slideActual = slides.length - 1;
+    }
+
+    if (slideActual < 0) {
+        slideActual = 0;
+    }
 
     mostrarSlide(slideActual);
 }
@@ -143,7 +154,7 @@ function toggleMusica() {
     const audio = document.getElementById("musica");
 
     if (audio.paused) {
-        audio.volume = 0.3; // volumen suave
+        audio.volume = 0.3;
         audio.play();
     } else {
         audio.pause();

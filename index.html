@@ -1,113 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nuestro Primer Mes ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Primer Mes ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
     text-align: center;
     color: #333;
-    overflow-x: hidden;
 }
 
-/* ESTRELLAS */
-.estrellas {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
-
-.estrellas::before {
-    content: "";
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    box-shadow:
-        100px 200px white,
-        200px 300px white,
-        300px 100px white,
-        400px 400px white,
-        600px 150px white,
-        800px 250px white,
-        1000px 350px white,
-        1200px 100px white,
-        1400px 200px white,
-        1600px 300px white;
-    animation: estrellasMove 50s linear infinite;
-}
-
-@keyframes estrellasMove {
-    from { transform: translateY(0); }
-    to { transform: translateY(-1000px); }
-}
-
-/* PANTALLA INICIAL */
-.inicio {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-    transition: opacity 1s ease;
-}
-
-.inicio button {
-    font-size: 1.3em;
-    padding: 15px 30px;
-    border-radius: 40px;
-    border: none;
-    background: white;
-    color: #ff4b5c;
-    cursor: pointer;
-    animation: latido 1.5s infinite;
-    transition: transform 0.3s;
-}
-
-.inicio button:hover {
-    transform: scale(1.1);
-}
-
-@keyframes latido {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-/* CONTENIDO */
 .container {
     max-width: 600px;
     margin: 40px auto;
     padding: 30px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 25px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    position: relative;
-    z-index: 2;
-
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 1s ease;
-    display: none;
-}
-
-.container.mostrar {
-    opacity: 1;
-    transform: translateY(0);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
     color: #ff4b5c;
 }
 
@@ -129,17 +50,11 @@ h1 {
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
-.slide img:hover {
-    transform: scale(1.05);
-    transition: 0.4s;
-}
-
 .mensaje {
     margin-top: 15px;
     font-size: 1.1em;
     line-height: 1.5;
     padding: 10px;
-    min-height: 60px;
 }
 
 .botones {
@@ -173,34 +88,48 @@ button:disabled {
 
 <body>
 
-<div class="estrellas"></div>
-
-<!-- PANTALLA INICIAL -->
-<div class="inicio">
-    <button onclick="iniciar()">Haz clic para comenzar 💖</button>
-</div>
-
-<!-- CONTENIDO -->
-<div class="container" id="contenido">
+<div class="container">
     <h1>Feliz 1 Mes ❤️</h1>
 
     <audio id="musica" loop>
         <source src="cancion.mp3" type="audio/mpeg">
     </audio>
 
+    <button onclick="toggleMusica()">🎵 Reproducir / Pausar música</button>
+
     <div class="slide">
-        <img src="foto5.jpg">
-        <div class="mensaje escribir">Hoy cumplimos un mes de noviazgo, y puedo decir que lo único que he sentido contigo ha sido mucha felicidad. Estoy muy contento de ser tu novio Valen, te quiero mucho💖</div>
+        <img src="foto5.jpg" alt="Foto juntos">
+        <div class="mensaje">Hoy cumplimos un mes de noviazgo, y puedo decir que lo único que he sentido contigo ha sido mucha felicidad. Estoy muy contento de ser tu novio Valen, te quiero mucho💖</div>
     </div>
 
     <div class="slide">
-        <img src="foto2.jpg">
-        <div class="mensaje escribir">Con el tiempo he ido descubriendo la persona tan maravillosa que eres; y me he ido enamorando cada vez más de ti ✨</div>
+        <img src="foto2.jpg" alt="Foto juntos">
+        <div class="mensaje">Con el tiempo he ido descubriendo la persona tan maravillosa que eres; y me he ido enamorando cada vez más de ti ✨</div>
     </div>
 
     <div class="slide">
-        <img src="foto3.jpg">
-        <div class="mensaje escribir">Es curioso porque siempre he esperado a la persona correcta y tengo la certeza que contigo la encontré; me encantas demasiado Valentina 😊</div>
+        <img src="foto3.jpg" alt="Foto juntos">
+        <div class="mensaje">Es curioso porque siempre he esperado a la persona correcta y tengo la certeza que contigo la encontré; me encantas demasiado Valentina 😊</div>
+    </div>
+
+    <div class="slide">
+        <img src="foto4.jpg" alt="Foto juntos">
+        <div class="mensaje">Gracias por quererme, por hacerme reír, por hacerme sentir seguro, por hacerme sentir nervioso, por hacerme sentir de mil formas bonitas💕</div>
+    </div>
+
+    <div class="slide">
+        <img src="foto7.jpg" alt="Foto juntos">
+        <div class="mensaje">Espero en un futuro compartir más viajes contigo, más momentos bellos, más tiempo juntos así como el que estás viendo ❤️</div>
+    </div>
+
+    <div class="slide">
+        <img src="foto6.jpg" alt="Foto juntos">
+        <div class="mensaje">Gracias por todo el amor y el cariño que me das; te extraño y espero que estemos juntos pronto para darte mil besos y mil abrazos 🥺</div>
+    </div>
+
+    <div class="slide">
+        <img src="foto1.jpg" alt="Foto juntos">
+        <div class="mensaje">Y esto apenas comienza… Te quiero mucho mucho mucho mucho vida mía💞</div>
     </div>
 
     <div class="botones">
@@ -211,60 +140,8 @@ button:disabled {
 
 <script>
 let slideActual = 0;
+mostrarSlide(slideActual);
 
-function iniciar() {
-    const audio = document.getElementById("musica");
-    const inicio = document.querySelector(".inicio");
-    const contenido = document.getElementById("contenido");
-
-    inicio.style.opacity = "0";
-
-    setTimeout(() => {
-        inicio.style.display = "none";
-    }, 1000);
-
-    contenido.style.display = "block";
-
-    setTimeout(() => {
-        contenido.classList.add("mostrar");
-    }, 50);
-
-    audio.volume = 0.2;
-    audio.play();
-
-    mostrarSlide(0);
-}
-
-// EFECTO ESCRITURA
-function efectoEscritura(elemento, velocidad = 40) {
-    const texto = elemento.getAttribute("data-texto");
-    elemento.innerHTML = "";
-    let i = 0;
-
-    function escribir() {
-        if (i < texto.length) {
-            elemento.innerHTML += texto.charAt(i);
-            i++;
-            setTimeout(escribir, velocidad);
-        }
-    }
-
-    escribir();
-}
-
-window.addEventListener("load", () => {
-    document.querySelectorAll(".escribir").forEach(el => {
-        el.setAttribute("data-texto", el.innerText);
-    });
-});
-
-function activarEscritura(index) {
-    const slide = document.getElementsByClassName("slide")[index];
-    const mensaje = slide.querySelector(".escribir");
-    efectoEscritura(mensaje, 50);
-}
-
-// SLIDES
 function mostrarSlide(n) {
     let slides = document.getElementsByClassName("slide");
 
@@ -273,7 +150,6 @@ function mostrarSlide(n) {
     }
 
     slides[n].style.display = "block";
-    activarEscritura(n);
 
     document.getElementById("btnAnterior").disabled = (n === 0);
     document.getElementById("btnSiguiente").disabled = (n === slides.length - 1);
@@ -284,10 +160,26 @@ function cambiarSlide(n) {
 
     slideActual += n;
 
-    if (slideActual >= slides.length) slideActual = slides.length - 1;
-    if (slideActual < 0) slideActual = 0;
+    if (slideActual >= slides.length) {
+        slideActual = slides.length - 1;
+    }
+
+    if (slideActual < 0) {
+        slideActual = 0;
+    }
 
     mostrarSlide(slideActual);
+}
+
+function toggleMusica() {
+    const audio = document.getElementById("musica");
+
+    if (audio.paused) {
+        audio.volume = 0.3;
+        audio.play();
+    } else {
+        audio.pause();
+    }
 }
 </script>
 

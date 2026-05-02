@@ -37,6 +37,41 @@ body {
     to   { transform: translateY(-100vh); opacity: 0; }
 }
 
+/* 🌙 LUNA */
+.luna {
+    position: fixed;
+    top: 40px;
+    right: 60px;
+    width: 80px;
+    height: 80px;
+    background: #fffde7;
+    border-radius: 50%;
+    box-shadow:
+        0 0 20px 8px rgba(255, 253, 180, 0.3),
+        0 0 60px 20px rgba(255, 250, 150, 0.15);
+    z-index: 1;
+    animation: brilloLuna 4s ease-in-out infinite;
+}
+
+/* Efecto creciente: sombra interior que "tapa" parte de la luna */
+.luna::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 15px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: #0d1b2a;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+@keyframes brilloLuna {
+    0%   { box-shadow: 0 0 20px 8px rgba(255,253,180,0.3), 0 0 60px 20px rgba(255,250,150,0.15); }
+    50%  { box-shadow: 0 0 30px 14px rgba(255,253,180,0.45), 0 0 80px 30px rgba(255,250,150,0.25); }
+    100% { box-shadow: 0 0 20px 8px rgba(255,253,180,0.3), 0 0 60px 20px rgba(255,250,150,0.15); }
+}
+    
 /* 🌸 PANTALLA INICIAL */
 .inicio {
     position: fixed;

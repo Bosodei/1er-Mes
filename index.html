@@ -16,38 +16,25 @@ body {
     overflow-x: hidden;
 }
 
-/* 🌟 ESTRELLAS MEJORADAS */
 .estrellas {
     position: fixed;
     width: 100%;
     height: 100%;
     z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
 }
 
-.estrellas::before,
-.estrellas::after {
-    content: "";
+.estrellas span {
     position: absolute;
-    width: 2px;
-    height: 2px;
     background: white;
-    box-shadow:
-        50px 100px white, 150px 200px white, 250px 300px white,
-        350px 150px white, 450px 250px white, 550px 350px white,
-        650px 100px white, 750px 200px white, 850px 300px white,
-        950px 150px white, 1050px 250px white, 1150px 350px white,
-        1250px 100px white, 1350px 200px white, 1450px 300px white;
-    animation: estrellasMove 60s linear infinite;
+    border-radius: 50%;
+    animation: moverEstrellas linear infinite;
 }
 
-.estrellas::after {
-    animation-duration: 100s;
-    opacity: 0.5;
-}
-
-@keyframes estrellasMove {
-    from { transform: translateY(0); }
-    to { transform: translateY(-1200px); }
+@keyframes moverEstrellas {
+    from { transform: translateY(0); opacity: 1; }
+    to   { transform: translateY(-100vh); opacity: 0; }
 }
 
 /* 🌸 PANTALLA INICIAL */
@@ -131,7 +118,7 @@ h1 {
 
 .mensaje {
     margin-top: 15px;
-    color: #222;
+    color: #ffffff;
     min-height: 60px;
 }
 
@@ -170,37 +157,37 @@ button:hover {
     <!-- TODAS LAS FOTOS -->
     <div class="slide">
         <img src="foto5.jpg">
-        <div class="mensaje escribir">Hoy cumplimos un mes de noviazgo...</div>
+        <div class="mensaje escribir">Hoy cumplimos un mes de noviazgo, y puedo decir que lo único que he sentido contigo ha sido mucha felicidad. Estoy muy contento de ser tu novio Valen, te quiero mucho💖</div>
     </div>
 
     <div class="slide">
         <img src="foto2.jpg">
-        <div class="mensaje escribir">Con el tiempo he ido descubriendo...</div>
+        <div class="mensaje escribir">Con el tiempo he ido descubriendo la persona tan maravillosa que eres; y me he ido enamorando cada vez más de tí ✨</div>
     </div>
 
     <div class="slide">
         <img src="foto3.jpg">
-        <div class="mensaje escribir">Es curioso porque siempre he esperado...</div>
+        <div class="mensaje escribir">Es curioso porque siempre he esperado a la persona correcta y tengo la certeza que contigo la encontré; me encantas demasiado Valentina 😊</div>
     </div>
 
     <div class="slide">
         <img src="foto4.jpg">
-        <div class="mensaje escribir">Gracias por quererme...</div>
+        <div class="mensaje escribir">Gracias por quererme, por hacerme reír, por hacerme sentir seguro, por hacerme sentir nervioso, por hacerme sentir de mil cosas por ti 💕</div>
     </div>
 
     <div class="slide">
         <img src="foto7.jpg">
-        <div class="mensaje escribir">Espero en un futuro compartir más viajes...</div>
+        <div class="mensaje escribir">Espero en un futuro compartir más viajes contigo, más momento bellos, más tiempo juntos así como el que estás viendo ❤️</div>
     </div>
 
     <div class="slide">
         <img src="foto6.jpg">
-        <div class="mensaje escribir">Gracias por todo el amor...</div>
+        <div class="mensaje escribir">Gracias por todooooooooooooo el amor y el cariño que me das; te extraño y espero que estemos juntos prontos para darte mil besos y mil abrazos 🥺</div>
     </div>
 
     <div class="slide">
         <img src="foto1.jpg">
-        <div class="mensaje escribir">Y esto apenas comienza… 💞</div>
+        <div class="mensaje escribir">Y esto apenas comienza… Te quiero mucho mucho mucho mucho vida mía💞</div>
     </div>
 
     <div>
@@ -210,6 +197,30 @@ button:hover {
 </div>
 
 <script>
+// Generar estrellas dinámicamente
+const contenedorEstrellas = document.querySelector(".estrellas");
+const totalEstrellas = 120;
+
+for (let i = 0; i < totalEstrellas; i++) {
+    const estrella = document.createElement("span");
+    const tamaño = Math.random() * 2.5 + 0.5;
+    const x = Math.random() * 100;
+    const duracion = Math.random() * 60 + 40;
+    const retraso = Math.random() * -80;
+    const yInicio = Math.random() * 100;
+
+    estrella.style.cssText = `
+        width: ${tamaño}px;
+        height: ${tamaño}px;
+        left: ${x}%;
+        top: ${yInicio}vh;
+        animation-duration: ${duracion}s;
+        animation-delay: ${retraso}s;
+        opacity: ${Math.random() * 0.7 + 0.3};
+    `;
+    contenedorEstrellas.appendChild(estrella);
+}
+
 let slideActual = 0;
 
 function iniciar() {
